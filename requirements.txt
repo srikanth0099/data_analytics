@@ -1,0 +1,5 @@
+pyspark
+pandas
+prefect
+psycopg2-binary
+requests
