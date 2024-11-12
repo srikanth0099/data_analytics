@@ -5,7 +5,7 @@ config_dev = {
         "file_storage":"",
         "postgres_connection_string": "jdbc:postgresql://localhost:5432/taxi",
         "db_user": "postgres",
-        "db_pwd": "pencil#7",
+        "db_pwd": "tiger",
         "spark_master": "local[*]",
         "spark_app_name": "Etl_project_prod"
 }
