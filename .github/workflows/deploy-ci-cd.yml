@@ -1,0 +1,54 @@
+name: CI-CD-Pipeline-deploy-job
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+      - 'deva'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      # Uncomment if you have tests
+      # - name: Run Tests
+      #   run: pytest tests
+
+  dev_deploy:
+    if: ${{ github.ref == 'refs/heads/dev' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    steps:
+      - name: Deploy to Dev
+        run: python flows/etl_flow.py
+
+  # deva_deploy:
+  #   if: ${{ github.ref == 'refs/heads/deva' }}
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: dev
+  #   steps:
+  #     - name: Deploy to Deva
+  #       run: python flows/etl_flow.py
+
+  # prod_deploy:
+  #   if: ${{ github.ref == 'refs/heads/main' }}
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: prod
+  #   steps:
+  #     - name: Deploy to Prod
+  #       run: python flows/etl_flow.py
