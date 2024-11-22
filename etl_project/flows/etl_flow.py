@@ -1,5 +1,7 @@
 from prefect import Flow, task
-
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.extract import extract_data
 from src.transform import transform_data
 from src.load import load_data
@@ -24,7 +26,7 @@ def run_extract(spark):
     return data
 
 @task
-def run_tranformation(data):
+def run_transformation(data):
     data_tranform = transform_data(data)
     return data_tranform
 
@@ -44,7 +46,7 @@ with Flow("ET_Flow") as flow:
     spark = initialize_spark()
     try:
         extracted_data = run_extract(spark)
-        transformed_data = run_tranformation(extracted_data)
+        transformed_data = run_transformation(extracted_data)
         run_load(transformed_data)
         send_success_notification()
     except Exception as e:

@@ -1,4 +1,4 @@
-config_dev = {
+config_prod = {
         "data_source": "https://data.cityofnewyork.us/resource/t29m-gskq.json",
         "email_sender": "srikanth.vutukuri58@gmail.com",
         "email_reciver":"srikanth.vutukuri58@gmail.com",

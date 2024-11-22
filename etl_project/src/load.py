@@ -1,4 +1,4 @@
-import psycopg2
+#import psycopg2
 from config import config_dev
 
 def load_data(data_final):
